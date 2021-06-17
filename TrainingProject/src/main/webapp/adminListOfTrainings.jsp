@@ -34,7 +34,7 @@
 	%>
 <!--Navbar -->
   <nav class="mb-1 navbar navbar-expand-lg navbar-dark">
-   <a href="dashboard.jsp"> <img src="images/ELearningIcon.png" width="40px"> </a>
+   <a href="adminDashboard.jsp"> <img src="images/ELearningIcon.png" width="40px"> </a>
     <a class="navbar-brand ml-3" href="dashboard.jsp">E - Learning</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent-555"
       aria-controls="navbarSupportedContent-555" aria-expanded="false" aria-label="Toggle navigation">

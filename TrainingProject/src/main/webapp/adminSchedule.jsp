@@ -1,6 +1,8 @@
+<%@page import="java.text.SimpleDateFormat"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
-
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@page import="com.team2.DAO.ListOfTrainingDAO,com.team2.model.*,java.util.*"%>  
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -84,7 +86,7 @@
 	%>
 	<!--Navbar -->
 	<nav class="mb-1 navbar navbar-expand-lg navbar-dark">
-		<a href="dashboard.jsp"> <img src="images/ELearningIcon.png"
+		<a href="adminDashboard.jsp"> <img src="images/ELearningIcon.png"
 			width="40px" />
 		</a> <a class="navbar-brand" href="adminDashboard.jsp">E - Learning</a>
 		<button class="navbar-toggler" type="button" data-toggle="collapse"
@@ -123,32 +125,59 @@
         <li class="breadcrumb-item active">Training Schedule</li>
       </ol>
     </div> 
+				<%
+						List<ListOfTrainings> listAll=ListOfTrainingDAO.getAllRecords();  
+						request.setAttribute("listAll",listAll);  
+						
+						ListOfTrainingDAO ldao = new ListOfTrainingDAO();
+					%>
+            	
+            	
+            	
+	
 
-
+			
 	<div class="container-sched">
+	
+	
+            	<c:forEach items="${listAll}" var = "u">
+            	
+			
+
 		<div class="row row-striped">
 			<div class="col-2 text-right">
 				<h1 class="display-4">
-					<span class="badge" style = "background-color: #72147e;">29</span>
+					<span class="badge" style = "background-color: #72147e;">${u.getDateNumber()}</span>
 				</h1>
-				<h2>MAY</h2>
+				<h2></h2>
 			</div>
 			<div class="col-10">
 				<h3 class="text-uppercase">
-					<strong>Ice Cream Social</strong>
+					<strong>${u.getCourse_name()}</strong>
 				</h3>
 				<ul class="list-inline">
 					<li class="list-inline-item"><i class="fa fa-calendar-o"
-						aria-hidden="true"></i> SATURDAY</li>
+						aria-hidden="true"></i> ${u.getDayName()}</li>
 					<li class="list-inline-item"><i class="fa fa-clock-o"
-						aria-hidden="true"></i> 12:30 PM - 2:00 PM</li>
-					<li class="list-inline-item"><i class="fa fa-location-arrow"
-						aria-hidden="true"></i> Cafe</li>
+						aria-hidden="true"></i> ${u.getStartTime()} - ${u.getEndTime()}</li>
+					<li class="list-inline-item"><i class="fas fa-user-tie"></i> ${u.getInstructor()}</li>
 				</ul>
-				<p>Lorem ipsum dolsit amet, consectetur adipiscing elit, sed do
-					eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+				<p>${u.getDescription()}</p>
 			</div>
 		</div>
+		
+	            	</c:forEach>    
+	            	
+	            	
+	            		<c:if test="${empty listAll}">
+						<div class="noDATA" style="position: absolute; top:30%; left:45%">
+							<br>
+							<br>
+							<h2 class="errorTitle" style="color: #9f5f80;  text-shadow: 2px 2px 5px;">No training seminars scheduled</h2>"
+							
+						</div>
+						</c:if>
+<!-- 	
 		<div class="row row-striped">
 			<div class="col-2 text-right">
 				<h1 class="display-4">
@@ -172,6 +201,7 @@
 					eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
 			</div>
 		</div>
+		 -->
 	</div>
 </body>
 </html>

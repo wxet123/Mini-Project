@@ -4,6 +4,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -27,8 +28,11 @@ public static Connection getConnection(){
 
 
 
-public static List<ListOfTrainings> getAllRecords(){  
+public static List<ListOfTrainings> getAllRecords() throws ParseException{  
 	
+	
+	
+
 	List<ListOfTrainings> listAll=new ArrayList<ListOfTrainings>();  
 	ListOfTrainings u=new ListOfTrainings();
       
@@ -37,12 +41,22 @@ public static List<ListOfTrainings> getAllRecords(){
         PreparedStatement ps=con.prepareStatement("select * from createtraining");  
         ResultSet rs=ps.executeQuery();  
         while(rs.next()){  
+        	
+        	Date date1=new SimpleDateFormat("yyyy-MM-dd").parse(rs.getString("date"));  
+        	
+        	u.setDateNumber(date1.getDate());
+        	u.setDayName(dayName(date1.getDay()).toUpperCase());
+        	
             u.setCourse_id(rs.getString("course_id"));
-            u.setCourse_name(rs.getString("course_name"));  
+            u.setCourse_name(rs.getString("course_name")); 
+            u.setDescription(rs.getString("description"));
             u.setDate(rs.getString("date"));
             u.setStartTime((rs.getString("startTime")));
             u.setEndTime((rs.getString("endTime")));
             u.setInstructor(rs.getString("instructor"));
+            
+            
+            
             listAll.add(u);  
             
 
@@ -90,4 +104,45 @@ public static String time(String strTime) {
 		return (output);
 }
     
+
+public static String dayName(int dateInput) {
+	
+	String day = "";
+	
+	
+	if(dateInput == 1) {day = "Monday";}
+
+	if(dateInput == 2) {day = "Tuesday";}
+
+	if(dateInput == 3) {day = "Wednesday";}
+	if(dateInput == 4) {day = "Thursday";}
+
+	if(dateInput == 5) {day = "Friday";}
+	if(dateInput == 6) {day = "Saturday";}
+	if(dateInput == 7) {day = "Sunday";}
+	return day;
+}
+public static String month(int dateInput) {
+	
+	String month = "";
+	
+	
+	if(dateInput == 0) {month = "JAN";}
+
+	if(dateInput == 1) {month = "FEB";}
+
+	if(dateInput == 2) {month = "MAR";}
+	if(dateInput == 3) {month = "APR";}
+
+	if(dateInput == 4) {month = "MAY";}
+	if(dateInput == 5) {month = "JUN";}
+	if(dateInput == 6) {month = "JUL";}
+	if(dateInput == 7) {month = "AUG";}
+	if(dateInput == 8) {month = "SEP";}
+	if(dateInput == 9) {month = "OCT";}
+	if(dateInput == 10) {month = "NOV";}
+	if(dateInput == 11) {month = "DEC";}
+	return month;
+}
+
 }
