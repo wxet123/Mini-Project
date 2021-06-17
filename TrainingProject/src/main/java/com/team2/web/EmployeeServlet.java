@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.team2.DAO.EmployeeDAO;
+import com.team2.DAO.LoginDAO;
 import com.team2.model.Employee;
 
 /**
@@ -19,7 +20,11 @@ import com.team2.model.Employee;
 public class EmployeeServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-	private EmployeeDAO employeeDAO = new EmployeeDAO();
+	private EmployeeDAO employeeDAO;
+	
+	 public void init() {
+		 employeeDAO = new EmployeeDAO();
+     }
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -43,6 +48,12 @@ public class EmployeeServlet extends HttpServlet {
 		String password = request.getParameter("password");
 		String address = request.getParameter("address");
 		String contact = request.getParameter("contact");
+		String userType = request.getParameter("radio");
+		
+
+		
+		
+
 		
 		Employee employee = new Employee();
 		employee.setFirstName(firstName);
@@ -52,24 +63,35 @@ public class EmployeeServlet extends HttpServlet {
 		employee.setAddress(address);
 		employee.setContact(contact);
 		
+		
+	
+		if(userType.equals("emp") ) {
+			employee.setIsAdmin(0);
+		}else {
+			employee.setIsAdmin(1);
+		}
+		
+		
+		
+		
+		
 		try {
+			if(!employeeDAO.isExisting(employee)) 
+			{
+				
+				employeeDAO.registerEmployee(employee);
+				response.sendRedirect("registered.jsp");
 			
-			employeeDAO.registerEmployee(employee);
-			
+			}
+			else {
+				
+				
+				response.sendRedirect("registerError.jsp");
+			}
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		}
 		
-		try {
-			
-			employeeDAO.registerEmployee1(employee);
-			
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
-		}
-		
-		RequestDispatcher dispatcher = request.getRequestDispatcher("/employeedetails.jsp");
-		dispatcher.forward(request, response);
 		
 	}
 

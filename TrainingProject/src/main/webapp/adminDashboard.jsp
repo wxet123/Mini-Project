@@ -1,5 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
+ <%@page import="com.team2.DAO.LoginDAO"%>
+ <%@page import="com.team2.DAO.EmployeeDAO"%>
+  <%@page import="com.team2.model.Login"%>
+  <%@page import="com.team2.model.Employee"%>
+<%@ taglib prefix ="sql" uri="http://java.sun.com/jsp/jstl/sql" %>
+
+<%@ taglib prefix ="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -30,7 +37,7 @@
 	src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"
 	integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4"
 	crossorigin="anonymous"></script>
-<link rel="stylesheet" href="casas.css">
+<link rel="stylesheet" href="adminDashboard.css">
 <!-- Font Awesome -->
 <link rel="stylesheet"
 	href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" />
@@ -45,7 +52,7 @@
 <link
 	href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.19.1/css/mdb.min.css"
 	rel="stylesheet" />
-<link rel="stylesheet" href="dashboard.css" />
+<link rel="stylesheet" href="css/adminDashboard.css" />
 <link rel="shortcut icon" href="images/ELearningFavicon.png"
 	type="image/x-icon">
 
@@ -76,20 +83,24 @@
 
 <body>
 
+
 	<%
 	response.setHeader("Cache-control", "no-cache, no-store, must-revalidate");
 
 	if (session.getAttribute("username") == null) {
 		response.sendRedirect("login.jsp");
+	
 	}
+
 	%>
-	
-	
+
+
+
 	<!--Navbar -->
 	<nav class="mb-1 navbar navbar-expand-lg navbar-dark">
 		<a href="dashboard.jsp"> <img src="images/ELearningIcon.png"
 			width="40px">
-		</a> <a class="navbar-brand" href="dashboard.jsp">E - Learning</a>
+		</a> <a class="navbar-brand" href="adminDashboard.jsp">E - Learning</a>
 		<button class="navbar-toggler" type="button" data-toggle="collapse"
 			data-target="#navbarSupportedContent-555"
 			aria-controls="navbarSupportedContent-555" aria-expanded="false"
@@ -99,20 +110,25 @@
 		<div class="collapse navbar-collapse" id="navbarSupportedContent-555">
 			<ul class="navbar-nav ml-auto">
 				<li class="nav-item active"><a class="nav-link mr-5"
-					href="dashboard.jsp"> Home <span class="sr-only">(current)</span>
+					href="adminDashboard.jsp"> Home <span class="sr-only">(current)</span>
 				</a></li>
 				<li class="nav-item"><a class="nav-link mr-5" href="#">About</a>
 				</li>
-				<li class="nav-item dropdown"><a class="nav-link"
+				
+				<li class="nav-item dropdown">
+				
+				<a class="nav-link"
 					id="navbarDropdownMenuLink-333" data-toggle="dropdown"
-					aria-haspopup="true" aria-expanded="false"> <i
+					aria-haspopup="true" aria-expanded="false"><span style="font-weight: 300; margin-right:10px;"> Welcome back <em>${username}</em></span> <i
 						class="fas fa-user-circle fa-lg"></i>
 				</a>
+				
 					<div class="dropdown-menu dropdown-menu-right dropdown-default"
 						aria-labelledby="navbarDropdownMenuLink-333">
 						<a class="dropdown-item" href="#">Account Setting</a>
-						<form action="Logout" method="post">
-							<input type="submit" value="Logout" class="dropdown-item log-out">
+						
+						<form action="Logout" method="post" >
+							<input type="submit"   class="dropdown-item log-out" value="Logout">
 						</form>
 					</div></li>
 			</ul>
@@ -137,7 +153,7 @@
 						<div class="text-center mt-3">
 							<button type="button" class="btn" id="addTraining"
 								data-bs-toggle="modal" data-bs-target="#exampleModal"
-								data-bs-whatever="@mdo">Enroll Training </button>
+								data-bs-whatever="@mdo">Create Training</button>
 							<!-- <button type="button" class="btn">ADD TRAINING</button> -->
 						</div>
 
@@ -157,8 +173,8 @@
 							</a>
 						</div>
 						<div class="text-center mt-3">
-							<a href="schedule.jsp">
-								<button type="button" class="btn">SCHEDULE</button>
+							<a href="adminSchedule.jsp">
+								<button type="button" class="btn">Create SCHEDULE</button>
 							</a>
 						</div>
 
@@ -178,7 +194,7 @@
 							</a>
 						</div>
 						<div class="text-center px-mt-2">
-							<a href="evaluation.jsp"><button type="button" class="btn">EVALUATION</button></a>
+							<a href="adminEvaluation.jsp"><button type="button" class="btn">EVALUATION</button></a>
 						</div>
 
 
@@ -197,7 +213,7 @@
 							</a>
 						</div>
 						<div class="text-center mt-3">
-							<a href="ListOfTrainings.jsp"><button type="button"
+							<a href="adminListOfTrainings.jsp"><button type="button"
 									class="btn">LIST OF TRAINING</button></a>
 						</div>
 
@@ -209,7 +225,6 @@
 			</div>
 		</div>
 	</section>
-	</div>
 
 	<!-- ADD TRAINING MODAL -->
 
@@ -249,6 +264,34 @@
 							<textarea class="form-control" id="message-text"
 								autocomplete="off" name="description" required></textarea>
 						</div>
+						
+						<div class="input-group mb-3">
+ 	 							<label class="input-group-text" for="inputGroupSelect01">Trainer</label>
+ 	 								<select class="form-select" id="inputGroupSelect01" name = "instructor">
+
+ 	 									<option >Paule</option>
+ 	 									<option >Jambert</option>
+ 	 									<option >Joepet</option>
+ 	 								</select>
+ 	 					</div>
+						<div class="mb-3-3">
+
+							<label for="date" class="col-form-label">Schedule
+								:</label>
+							<input type="date" class="form-control-1" id="date"
+								 name="date" required>
+							<br>
+							<label for="time" class="col-form-label"> Start time
+								:</label>
+							<input type="time" class="form-control-1" id="date"
+								 name="startTime" required style="margin-left: 29px; margin-bottom: 50px;">
+
+								<label for="time" class="col-form-label" style ="margin-left: 10px"> End time
+								:</label>
+							<input type="time" class="form-control-1" id="date"
+								 name="endTime" required style="margin-left: 29px; margin-bottom: 50px;">
+						</div>
+							
 
 
 					</form>
@@ -259,30 +302,30 @@
 					<button type="button" class="btn btn-secondary"
 						data-bs-dismiss="modal" id="ssubmit" onclick="closed()">Close</button>
 					<button type="button" class="btn btn-primary" id="submit"
-						onclick="submit()">Submit</button>
+						onclick="submit()">Add</button>
 				</div>
 			</div>
 		</div>
 	</div>
 
+<script type="text/javascript">
+    function closed() {
+      document.getElementById("recipient-name").value = null;
+      document.getElementById("message-text").value = null;
+    }
+    function closed(){
+        document.getElementById("recipient-name").value = null;
+        document.getElementById("recipient-name1").value = null;
+        document.getElementById("message-text").value = null;
+    }
+      
+    function submit() {
+      	document.getElementById("myform").submit();
+      
+    }
+    
+  </script>
 
-
-	<script type="text/javascript">
-		function closed() {
-			document.getElementById("recipient-name").value = null;
-			document.getElementById("message-text").value = null;
-		}
-		function closed() {
-			document.getElementById("recipient-name").value = null;
-			document.getElementById("recipient-name1").value = null;
-			document.getElementById("message-text").value = null;
-		}
-
-		function submit() {
-			document.getElementById("myform").submit();
-
-		}
-	</script>
 
 
 	<!-- ADD TRAINING MODAL -->
@@ -297,6 +340,7 @@
 		<!-- Copyright -->
 	</footer>
 	<!-- Footer -->
+
 </body>
 
 </html>

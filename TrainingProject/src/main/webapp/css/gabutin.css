@@ -26,7 +26,7 @@ body, input{
     width: 2000px;
     height: 2000px;
     border-radius: 50%;
-    background: linear-gradient(-45deg, #F50024, #f82f4d);
+    background: linear-gradient(-45deg, #f82f4d, #f82f4d);
     top: -10%;
     right: 48%;
     transform: translateY(-50%);
@@ -116,7 +116,12 @@ form.sign-up-form{
 .input-field input::placeholder{
     color: #aaa;
     font-weight: 500;
+    
 }
+
+
+
+
 
 .btn{
     width: 150px;
@@ -125,7 +130,7 @@ form.sign-up-form{
     outline: none;
     border-radius: 49px;
     cursor: pointer;
-    background-color: #F50024;
+    background-color: #f82f4d;
     color: #fff;
     text-transform: uppercase;
     font-weight: 600;
@@ -196,7 +201,7 @@ form.sign-up-form{
     margin:0;
     background: none;
     border: 2px solid #fff;
-    width: 130px;
+    width: 40%;
     height: 41px;
     font-weight: 600;
     font-size: 0.8rem;
@@ -256,16 +261,26 @@ form.sign-up-form{
 
  /* Hide password */
 
+ .eye-1{
+ 
+	position: absolute;
+	top: 19.8rem;
+     bottom:13.8rem;
+     left: 39rem;
+     cursor: pointer;
 
- .eye{
-     position:absolute;
+ }
+ .eye-2{
+ 
+	position:absolute;
+	top: 17.7em;
      bottom:13.8rem;
      left: 39rem;
      cursor: pointer;
 
  }
 
- #hide2{
+ #hide1{
      display: none;
      
  }
@@ -408,13 +423,59 @@ form.sign-up-form{
             bottom: 28%;
             left: 50%
         }
-
-
-
        
          
      }
 
 
-
 }
+
+
+.r{
+	margin-top: 15px;
+    height: 52px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  input[type="radio"]{
+    display: none;
+  }
+  
+  .label{
+    display: block;
+    cursor: pointer;
+    font-weight: 500;
+    margin-bottom: 10px;
+  }
+  
+  .label .checker{
+    display: inline-flex;
+    align-items: center;
+    padding: 10px 20px 10px 10px;
+    border-radius: 31px;
+    transition: .25s ease;
+  }
+  
+  .label .checker:hover,
+  input[type="radio"]:checked + .checker{
+    background-color: #d6d6e5;
+  }
+  
+  .label .checker:before{
+    content: "";
+    background-color: #fff;
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    margin-right: 10px;
+    transition: .25s ease;
+    box-shadow:  inset 0 0 0 2px #f82f4d;
+  }
+  
+  input[type="radio"]:checked + .checker:before{
+    box-shadow: inset 0 0 0 10px #f82f4d;
+  }
+  
+  

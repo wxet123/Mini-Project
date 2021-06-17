@@ -13,25 +13,27 @@ sign_in_btn.addEventListener('click', () => {
 
 function showPassword(){
     var x = document.getElementById("myInput");
-    var y = document.getElementById("hide1");
-    var z = document.getElementById("hide2");
+    var hide1 = document.getElementById("hide1");
+    var hide2 = document.getElementById("hide2");
     var w = document.getElementById("myInput2");
 
-    if(x.type === 'password', w.type ==='password'){
+    if(x.type === 'password' || w.type ==='password'){
         x.type = "text";
         w.type = "text";
-        y.style.display = "none";
-        z.style.display = "block";
+        hide1.style.display = "block";
+        hide2.style.display = "none";
     }
     else{
         x.type = "password";
         w.type = "password";
-        y.style.display = "block";
-        z.style.display = "none";
+        hide1.style.display = "none";
+        hide2.style.display = "block";
     }
 
 
 }
+
+
 
 
 

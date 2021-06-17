@@ -7,24 +7,68 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+import javax.servlet.annotation.WebServlet;
+
 import com.team2.model.Employee;
 
 
 public class EmployeeDAO {
 	
 	
-	//.getConnection("jdbc:mysql://localhost:3306/employees?useSSL=false&useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC", "root", "root");
+	public boolean isExisting(Employee employee)throws ClassNotFoundException {
+		
+
+		Class.forName("com.mysql.cj.jdbc.Driver");
+		
+		String query_employee_info = "Select username from employee where username = ?";
+		boolean hasExisted = false;
+		try (Connection connection = DriverManager
+				.getConnection("jdbc:mysql://localhost:3306/employees?allowPublicKeyRetrieval=true&useSSL=false&useTimezone=true&serverTimezone=UTC", "root", "Neverwinter132!");
+	    		
+				
+				
+	    		PreparedStatement preparedStatement = connection.prepareStatement(query_employee_info)){
+						preparedStatement.setString(1, employee.getUsername());
+						
+	    				ResultSet rs  = preparedStatement.executeQuery();
+	    				
+	    				
+	    				while(rs.next()) {
+	    					
+	    					if(rs.getString(1).equals(employee.getUsername()))
+	    					{
+	    						return hasExisted = true;
+	    					
+	    					}
+	    					else { return hasExisted; }
+	    				
+	    			
+	    				}
+	    				
+		}
+		catch (SQLException e) {
+	    	printSQLException(e);
+	    }
+	    return hasExisted;
+	    
+	}
+		
+		
+	
+		
+	
+	
 	public int registerEmployee(Employee employee) throws ClassNotFoundException{
 		String INSERT_EMPLOYEEINFO_SQL = "INSERT INTO employee" +
-				" (first_name, last_name, username, password, address, contact) VALUES " +
-				" (?, ?, ?, ?,?,?);";
+				" (first_name, last_name, username, password, address, contact, isAdmin) VALUES " +
+				" (?, ?, ?, ?,?,?,?);";
 		
 		int result = 0;
 		
-		Class.forName("com.mysql.jdbc.Driver");
+		Class.forName("com.mysql.cj.jdbc.Driver");
 		
 		try (Connection connection = DriverManager
-				.getConnection("jdbc:mysql://localhost:3306/employees?useSSL=false&useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC", "root", "root");
+				.getConnection("jdbc:mysql://localhost:3306/employees?allowPublicKeyRetrieval=true&useSSL=false&useTimezone=true&serverTimezone=UTC", "root", "Neverwinter132!");
 	    		
 				
 				
@@ -36,11 +80,15 @@ public class EmployeeDAO {
 						preparedStatement.setString(4, employee.getPassword());
 						preparedStatement.setString(5, employee.getAddress());
 						preparedStatement.setString(6, employee.getContact());
-	    				
+						preparedStatement.setInt(7, employee.getIsAdmin());
+						
 	    				System.out.println(preparedStatement);
 	    				result  = preparedStatement.executeUpdate();
 	    				ResultSet tableKeys = preparedStatement.getGeneratedKeys();
 	    				tableKeys.next();
+	    				
+	    				
+	    				
 	    				
 	    } catch (SQLException e) {
 	    	printSQLException(e);
@@ -51,16 +99,17 @@ public class EmployeeDAO {
 	
 	public int registerEmployee1(Employee employee) throws ClassNotFoundException{
 		
-		String INSERT_USERLOGIN_SQL = "INSERT INTO login" +
-				" (username, password) VALUES " +
-				" (?, ?);";
+		String INSERT_USERLOGIN_SQL = "INSERT INTO employee" +
+				" (username, password, isAdmin) VALUES " +
+				" (?, ?, ?);";
+
 		
 		int result = 0;
 		
-		Class.forName("com.mysql.jdbc.Driver");
+		Class.forName("com.mysql.cj.jdbc.Driver");
 		
 		try (Connection connection = DriverManager
-				.getConnection("jdbc:mysql://localhost:3306/employees?useSSL=false&useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC", "root", "root");
+				.getConnection("jdbc:mysql://localhost:3306/employees?allowPublicKeyRetrieval=true&useSSL=false&useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC", "root", "Neverwinter132!");
 	    		
 				
 				
@@ -69,6 +118,7 @@ public class EmployeeDAO {
 	    				
 						preparedStatement.setString(1, employee.getUsername());
 						preparedStatement.setString(2, employee.getPassword());
+						preparedStatement.setInt(3, employee.getIsAdmin());
 	    				
 	    				System.out.println(preparedStatement);
 	    				result  = preparedStatement.executeUpdate();

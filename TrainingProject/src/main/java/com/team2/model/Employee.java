@@ -8,10 +8,17 @@ public class Employee {
     private String password;
     private String address;
     private String contact;
+    private int isAdmin;
     
-    
+  
 	public String getFirstName() {
 		return firstName;
+	}
+	public int getIsAdmin() {
+		return isAdmin;
+	}
+	public void setIsAdmin(int isAdmin) {
+		this.isAdmin = isAdmin;
 	}
 	public void setFirstName(String firstName) {
 		this.firstName = firstName;
@@ -28,9 +35,13 @@ public class Employee {
 	public void setUsername(String username) {
 		this.username = username;
 	}
+
+	
+	
 	public String getPassword() {
 		return password;
 	}
+
 	public void setPassword(String password) {
 		this.password = password;
 	}

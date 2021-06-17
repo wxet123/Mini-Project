@@ -26,6 +26,9 @@ crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
 </head>
 <body>
+
+
+
 	
     <div class="container">
         <div class="forms-container">
@@ -34,10 +37,11 @@ crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 			<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 			
 			<script>
-			Swal.fire('Oops...', 'Login Failed!', 'error')
+			Swal.fire('Wrong password', 'Login Failed!', 'error')
 			
 			</script>
 			
+		
 		
  
              <!--LOGIN form-->
@@ -81,25 +85,26 @@ crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
                     <div class="input-field">
                         <i class ="fas fa-user-alt"></i>
-                        <input type="text" placeholder="First Name" required>
+                        <input type="text"  name= "firstName" placeholder="First Name" required>
                     </div>
 
                     <div class="input-field">
                         <i class ="fas fa-user-alt"></i>
-                        <input type="text" placeholder="Last Name" required>
+                        <input type="text"  name= "lastName" placeholder="Last Name" required>
                     </div>
 
 
                     <div class="input-field">
                         <i class ="fas fa-user-tie"></i>
-                        <input type="text" placeholder="Username" required>
+                        <input type="text"  name= "username" placeholder="Username" required>
                     </div>
 
                     
 
                     <div class="input-field">
                         <i class ="fas fa-lock"></i>
-                        <input type="password" placeholder="Password" required id="myInput2">
+                        <input type="password" placeholder="Password" name="password" required id="myInput2" pattern = "(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}" title="Password must contain at least one number, one uppercase and lowercase letter and  special character, and at least 8 or more characters">
+
                         <!-- hide password-->
                         
                         <span class="eye" onclick="showPassword()">
@@ -111,13 +116,27 @@ crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
                     <div class="input-field">
                         <i class ="fas fa-map-marker"></i>
-                        <input type="text" placeholder="Address">
+                        <input type="text"  name= "address" placeholder="Address">
                     </div>
 
                     <div class="input-field">
                         <i class ="fas fa-address-card"></i>
-                        <input type="text" placeholder="Contact">
+      					  <input type="text" placeholder="Contact" name="contact" onkeypress="return onlyNumberKey(event)">
                     </div>
+                    
+                    						<div class="r">
+                        <label class="label">
+                          <input type="radio" id="emp" name="radio" value = "emp"/>
+                          <span class="checker">Employee</span>
+                        </label>
+                        <label class="label">
+                          <input type="radio" id="trainer" name="radio" value ="trainer" />
+                          <span class="checker">Trainer</span>
+                        </label>
+
+                      </div>
+                    
+                    
                     
                     <input type="submit" value="Sign up" class="btn solid">
    
@@ -159,7 +178,16 @@ crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
     <!--Javascript -->
         <script src="js/gabutin.js"> </script>
-
+       <script>
+    	function onlyNumberKey(evt) {
+         
+        // Only ASCII character in that range allowed
+        var ASCIICode = (evt.which) ? evt.which : evt.keyCode
+        if (ASCIICode > 31 && (ASCIICode < 48 || ASCIICode > 57))
+            return false;
+        return true;
+    	}
+		</script>
 
     </body>
 </html>

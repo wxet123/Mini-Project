@@ -1,4 +1,5 @@
-
+<%@page import="com.team2.DAO.ListOfTrainingDAO,com.team2.model.*,java.util.*"%>  
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>  
   
 <html>  
@@ -13,14 +14,13 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.min.css" rel="stylesheet">
     <!-- Material Design Bootstrap -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.19.1/css/mdb.min.css" rel="stylesheet"> 
-	<link rel="stylesheet" href="ambrad.css">
+	<link rel="stylesheet" href="adminAmbrad.css">
 	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 	<link rel="shortcut icon" href="images/ELearningFavicon.png" type="image/x-icon">
 	  
 	<title>View Users</title>  
 	</head>  
 <body>
-
 
 
 	<%
@@ -43,7 +43,7 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent-555">
       <ul class="navbar-nav ml-auto">
         <li class="nav-item active">
-          <a class="nav-link mr-5" href="dashboard.jsp">
+          <a class="nav-link mr-5" href="adminDashboard.jsp">
             Home
             <span class="sr-only">(current)</span>
           </a>
@@ -53,13 +53,12 @@
         </li>
         <li class="nav-item dropdown">
           <a class="nav-link" id="navbarDropdownMenuLink-333" data-toggle="dropdown" aria-haspopup="true"
-            aria-expanded="false">
-            <span style="font-weight: 300; margin-right:10px;"> Welcome back <em>${username}</em></span> 
+            aria-expanded="false"><span style="font-weight: 300; margin-right:10px;"> Welcome back <em>${username}</em></span> 
             <i class="fas fa-user-circle fa-lg"></i>
           </a>
           <div class="dropdown-menu dropdown-menu-right dropdown-default" aria-labelledby="navbarDropdownMenuLink-333">
             <a class="dropdown-item" href="#">Account Setting</a>
-           						<form action="Logout" method="post" >
+						<form action="Logout" method="post" >
 							<input type="submit"   class="dropdown-item log-out" value="Logout">
 						</form>
           </div>
@@ -71,7 +70,7 @@
   
     <div class="nav-bread" aria-label="breadcrumb">
       <ol class="breadcrumb">
-        <li class="breadcrumb-item"><a class="text-dark" href="dashboard.jsp">Dashboard</a></li>
+        <li class="breadcrumb-item"><a class="text-dark" href="adminDashboard.jsp">Dashboard</a></li>
         <li class="breadcrumb-item active">List of Trainings</li>
       </ol>
     </div> 
@@ -81,14 +80,13 @@
                 <h1 class="mb-4 px-md-3 text-center">List of Trainings</h1>
                 <div class="card px-md-3 py-md-3">
                     <div class="card-body">
-                     <span class="d-block p-2 bg-fujitsu text-white">Here's all your trainings including Completed, Pending and Not Enrolled</span>
+                     <span class="d-block p-2 bg-fujitsu text-white">List of training meetings created</span>
                      
-					<%@page import="com.team2.DAO.ListOfTrainingDAO,com.team2.model.*,java.util.*"%>  
-					<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
  
 					<%
-					List<ListOfTrainings> listAll=ListOfTrainingDAO.getAllRecords();  
-					request.setAttribute("listAll",listAll);  
+						List<ListOfTrainings> listAll=ListOfTrainingDAO.getAllRecords();  
+						request.setAttribute("listAll",listAll);  
 					%>
                 	
                     <br>    
@@ -97,7 +95,7 @@
 						<tr>
 							<th class = "th">COURSE ID</th>
 							<th class = "th">COURSE</th>
-							<th class = "th">Date</th>
+							<th class = "th">DATE</th>
 						</tr>
 					</thead>
 					
@@ -106,13 +104,14 @@
 					<tbody>
 						<tr class="active-row">
 							<td>${u.getCourse_id()}</td>
-							<td>${u.getCouse_name()}</td>
+							<td>${u.getCourse_name()}</td>
 							<td>${u.getDate()}</td>
 						</tr>
 					</c:forEach>
 					
 					</tbody>
 					</table>
+					
 					<c:if test="${empty listAll}">
 						<div class="noDATA">
 							<br>
@@ -146,9 +145,11 @@
 <!-- MDB core JavaScript -->
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.19.1/js/mdb.min.js"></script>
 <script>
+
 $(document).ready(function() {
 	
 });
+
 </script>
 </body> 
 

@@ -6,6 +6,7 @@ public class Login implements Serializable  {
 	 private static final long serialVersionUID = 1L;
 	    private String username;
 	    private String password;
+	    private int isAdmin;
 	    
 	    
 	    
@@ -15,6 +16,14 @@ public class Login implements Serializable  {
 		}
 		public void setUsername(String username) {
 			this.username = username;
+		}
+		
+		
+		public int getIsAdmin() {
+			return isAdmin;
+		}
+		public void setIsAdmin(int isAdmin) {
+			this.isAdmin = isAdmin;
 		}
 		public String getPassword() {
 			return password;

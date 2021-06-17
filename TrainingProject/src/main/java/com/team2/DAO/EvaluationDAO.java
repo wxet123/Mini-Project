@@ -11,8 +11,8 @@ public class EvaluationDAO {
 	
 	private String jdbcURL = "jdbc:mysql://localhost:3306/employees";
 	private String jdbcUsername = "root";
-	private String jdbcPassword = "root";
-	private String jdbcDriver = "com.mysql.jdbc.Driver";
+	private String jdbcPassword = "Neverwinter132!";
+	private String jdbcDriver = "com.mysql.cj.jdbc.Driver";
 	
 	private static final String INSERT_EVALUATION_SQL = "INSERT INTO evaluation "
 			+ "(question_one, question_two, "
@@ -30,7 +30,7 @@ public class EvaluationDAO {
 		try {
 			Class.forName(jdbcDriver);
 			connection = DriverManager
-					.getConnection("jdbc:mysql://localhost:3306/employees?useSSL=false&useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC", "root", "root");
+					.getConnection("jdbc:mysql://localhost:3306/employees?useSSL=false&useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC", "root", "Neverwinter132!");
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

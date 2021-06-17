@@ -6,6 +6,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import com.team2.model.Employee;
 import com.team2.model.Login;
 
 public class LoginDAO {
@@ -13,28 +14,108 @@ public class LoginDAO {
 	public boolean validate(Login login) throws ClassNotFoundException{
 		boolean status = false;
 		
-		Class.forName("com.mysql.jdbc.Driver");
+		Class.forName("com.mysql.cj.jdbc.Driver");
 		
 		  try (Connection connection = DriverManager
-				  .getConnection("jdbc:mysql://localhost:3306/employees?useTimezone=true&serverTimezone=UTC", "root", "root");
+				  .getConnection("jdbc:mysql://localhost:3306/employees?allowPublicKeyRetrieval=true&useSSL=false&useTimezone=true&serverTimezone=UTC", "root", "Neverwinter132!");
 
-				  // Step 2:Create a statement using connection object
+
+		           PreparedStatement preparedStatement = connection
+				            .prepareStatement("select * from employee where username = ? and password = ? ")) {
+				            preparedStatement.setString(1, login.getUsername());
+				            preparedStatement.setString(2, login.getPassword()); 
+				    
+				            
+				            
+		            ResultSet rs = preparedStatement.executeQuery();
+		            
+		            
+		            
+		            status = rs.next();
+		            
+//		            
+		            while(rs.next()) {
+
+		            if(rs.getInt(7) == 0)
+		            {
+		            	status = true;
+		            }
+		           
+		            }
+		        } catch (SQLException e) {
+		            printSQLException(e);
+		        }
+		        return status;
+		    }
+	
+	
+	
+	public boolean adminValidation(Login login) throws ClassNotFoundException {
+		
+		boolean status = false;
+		Class.forName("com.mysql.cj.jdbc.Driver");
+		  try (Connection connection = DriverManager
+				  .getConnection("jdbc:mysql://localhost:3306/employees?allowPublicKeyRetrieval=true&useSSL=false&useTimezone=true&serverTimezone=UTC", "root", "Neverwinter132!");
+
+
 		            PreparedStatement preparedStatement = connection
-		            .prepareStatement("select * from login where username = ? and password = ? ")) {
+		            .prepareStatement("select * from employee where username = ? and password = ? ")) {
 		            preparedStatement.setString(1, login.getUsername());
 		            preparedStatement.setString(2, login.getPassword()); 
-
-		            System.out.println(preparedStatement);
+		    
+		            
+		            
+		            
 		            ResultSet rs = preparedStatement.executeQuery();
-		            status = rs.next();
 
+		            while(rs.next()) {
+
+			            if(rs.getInt(7) == 1)
+			            {
+			            	status = true;
+			            }
+			           
+			            }
 		        } catch (SQLException e) {
-		            // process sql exception
+		            printSQLException(e);
+		        }
+		        return status;
+		    }
+		
+	
+	public boolean adminValidationDashboard(Login login) throws ClassNotFoundException {
+		
+		boolean status = false;
+		Class.forName("com.mysql.cj.jdbc.Driver");
+		  try (Connection connection = DriverManager
+				  .getConnection("jdbc:mysql://localhost:3306/employees?allowPublicKeyRetrieval=true&useSSL=false&useTimezone=true&serverTimezone=UTC", "root", "Neverwinter132!");
+
+
+		            PreparedStatement preparedStatement = connection
+		            .prepareStatement("select * from employee where username = ?")) {
+		            preparedStatement.setString(1, login.getUsername());
+		    
+		            
+		            
+		            
+		            ResultSet rs = preparedStatement.executeQuery();
+
+		            while(rs.next()) {
+
+			            if(rs.getInt(7) == 1)
+			            {
+			            	status = true;
+			            }
+			           
+			            }
+		        } catch (SQLException e) {
 		            printSQLException(e);
 		        }
 		        return status;
 		    }
 
+	
+	
 	private void printSQLException(SQLException ex) {
 		for (Throwable e: ex) {
             if (e instanceof SQLException) {
@@ -50,6 +131,13 @@ public class LoginDAO {
             }
         }
     }
+
+
+
+	public boolean isAdmin(boolean adminStatus) {
+		// TODO Auto-generated method stub
+		return false;
+	}
 }
 		
 	

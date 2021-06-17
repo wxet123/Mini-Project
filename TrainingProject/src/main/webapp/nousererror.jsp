@@ -1,3 +1,4 @@
+
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
  pageEncoding="ISO-8859-1"%>
  <%@page import="com.team2.DAO.EmployeeDAO"%>
@@ -28,6 +29,7 @@ crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 </head>
 <body>
 
+		
 	
     <div class="container">
         <div class="forms-container">
@@ -36,7 +38,10 @@ crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 			<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 			
 
+			<script>
+			Swal.fire('Unregistered User', 'Sign up first', 'error' ,   'Retry');
 			
+			</script>
 		
  
              <!--LOGIN form-->
@@ -174,12 +179,11 @@ crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     </div>
 
 
-    <!--Javascript -->
         <script src="js/gabutin.js"> </script>
        <script>
     	function onlyNumberKey(evt) {
          
-        // Only ASCII character in that range allowed
+
         var ASCIICode = (evt.which) ? evt.which : evt.keyCode
         if (ASCIICode > 31 && (ASCIICode < 48 || ASCIICode > 57))
             return false;

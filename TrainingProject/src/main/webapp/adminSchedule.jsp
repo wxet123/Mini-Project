@@ -40,7 +40,7 @@
 <link
 	href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.19.1/css/mdb.min.css"
 	rel="stylesheet" />
-<link rel="stylesheet" href="dashboard.css" />
+<link rel="stylesheet" href="css/adminDashboard.css" />
 <link rel="shortcut icon" href="images/ELearningFavicon.png"
 	type="image/x-icon">
 
@@ -67,7 +67,6 @@
 	src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.19.1/js/mdb.min.js"></script>
 
 
-
 <link
 	href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css"
 	rel="stylesheet" />
@@ -87,7 +86,7 @@
 	<nav class="mb-1 navbar navbar-expand-lg navbar-dark">
 		<a href="dashboard.jsp"> <img src="images/ELearningIcon.png"
 			width="40px" />
-		</a> <a class="navbar-brand" href="dashboard.jsp">E - Learning</a>
+		</a> <a class="navbar-brand" href="adminDashboard.jsp">E - Learning</a>
 		<button class="navbar-toggler" type="button" data-toggle="collapse"
 			data-target="#navbarSupportedContent-555"
 			aria-controls="navbarSupportedContent-555" aria-expanded="false"
@@ -97,13 +96,14 @@
 		<div class="collapse navbar-collapse" id="navbarSupportedContent-555">
 			<ul class="navbar-nav ml-auto">
 				<li class="nav-item active"><a class="nav-link mr-5"
-					href="dashboard.jsp"> Home <span class="sr-only">(current)</span>
+					href="adminDashboard.jsp"> Home <span class="sr-only">(current)</span>
 				</a></li>
 				<li class="nav-item"><a class="nav-link mr-5" href="#">About</a>
 				</li>
-				<li class="nav-item dropdown"><a class="nav-link"
+				<li class="nav-item dropdown">
+				<a class="nav-link"
 					id="navbarDropdownMenuLink-333" data-toggle="dropdown"
-					aria-haspopup="true" aria-expanded="false"> <i
+					aria-haspopup="true" aria-expanded="false"> <span style="font-weight: 300; margin-right:10px;"> Welcome back <em>${username}</em></span> <i
 						class="fas fa-user-circle fa-lg"></i>
 				</a>
 					<div class="dropdown-menu dropdown-menu-right dropdown-default"
@@ -117,14 +117,19 @@
 		</div>
 	</nav>
 	<!--/.Navbar -->
-
+    <div class="nav-bread" aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a class="text-dark" href="adminDashboard.jsp">Dashboard</a></li>
+        <li class="breadcrumb-item active">Training Schedule</li>
+      </ol>
+    </div> 
 
 
 	<div class="container-sched">
 		<div class="row row-striped">
 			<div class="col-2 text-right">
 				<h1 class="display-4">
-					<span class="badge">29</span>
+					<span class="badge" style = "background-color: #72147e;">29</span>
 				</h1>
 				<h2>MAY</h2>
 			</div>
@@ -147,7 +152,7 @@
 		<div class="row row-striped">
 			<div class="col-2 text-right">
 				<h1 class="display-4">
-					<span class="badge">30</span>
+					<span class="badge" style = "background-color: #72147e;">30</span>
 				</h1>
 				<h2>MAY</h2>
 			</div>

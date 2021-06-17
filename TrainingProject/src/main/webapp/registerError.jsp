@@ -1,3 +1,4 @@
+
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
  pageEncoding="ISO-8859-1"%>
  <%@page import="com.team2.DAO.EmployeeDAO"%>
@@ -28,6 +29,7 @@ crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 </head>
 <body>
 
+			
 	
     <div class="container">
         <div class="forms-container">
@@ -36,7 +38,15 @@ crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 			<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 			
 
+			<script>
+			Swal.fire({
+				title: 'Registration Failed', 
+				text: 'User already existed', 
+				icon: 'error' ,   
+				button: 'Retry'
+			});
 			
+			</script>
 		
  
              <!--LOGIN form-->

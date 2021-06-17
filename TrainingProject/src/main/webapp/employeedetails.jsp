@@ -8,18 +8,24 @@
 <title>Insert title here</title>
 </head>
 <body>
-
+	<%
+		
+		response.setHeader("Cache-control", "no-cache, no-store, must-revalidate");
+	
+	
+	
+		if(session.getAttribute("username") == null){
+			 response.sendRedirect("login.jsp");
+		}
+	%>
    		<jsp:useBean id="employee" class="com.team2.model.Employee" />
 
  		<jsp:setProperty property="*" name="employee" />
 
 		<%
-  			EmployeeDAO employeeDao = new EmployeeDAO();
-  			int status = employeeDao.registerEmployee1(employee);
-  			int status1 = employeeDao.registerEmployee(employee);
-  		  	if (status > 0 && status1 > 0) {
+  			
   		   	out.print("You are successfully registered");
-  		 	 }
+  		 	 
 		%>
 
 </body>

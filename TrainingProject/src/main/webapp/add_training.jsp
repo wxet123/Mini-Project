@@ -53,7 +53,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="ssubmit" onclick="closed()">Close</button>
-        <button type="button" class="btn btn-primary" id="submit" onclick="submit()">Submit</button>
+        <button type="button" class="btn btn-primary" id="submit" onclick="submit()">Add</button>
       </div>
     </div>
   </div>
